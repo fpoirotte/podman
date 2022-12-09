@@ -7,8 +7,9 @@ RequiresMountsFor=%t/containers
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
+Environment=KUBE_OPTIONS=
 TimeoutStopSec=70
-ExecStart=@@PODMAN@@ play kube --replace --service-container=true %I
+ExecStart=@@PODMAN@@ play kube --replace --service-container=true $KUBE_OPTIONS %I
 ExecStop=@@PODMAN@@ play kube --down %I
 Type=notify
 NotifyAccess=all
