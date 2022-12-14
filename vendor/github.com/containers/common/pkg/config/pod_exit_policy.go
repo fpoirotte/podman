@@ -12,6 +12,9 @@ const (
 	// PodExitPolicyContinue instructs the pod to continue running when the
 	// last container has exited.
 	PodExitPolicyContinue PodExitPolicy = "continue"
+	// PodExitPolicyImmediate instructs the pod to stop as soon as the first
+	// container has exited.
+	PodExitPolicyImmediate = "immediate"
 	// PodExitPolicyStop instructs the pod to stop when the last container
 	// has exited.
 	PodExitPolicyStop = "stop"
@@ -30,6 +33,8 @@ func ParsePodExitPolicy(policy string) (PodExitPolicy, error) {
 		return PodExitPolicyContinue, nil
 	case string(PodExitPolicyStop):
 		return PodExitPolicyStop, nil
+	case string(PodExitPolicyImmediate):
+		return PodExitPolicyImmediate, nil
 	default:
 		return PodExitPolicyUnsupported, fmt.Errorf("invalid pod exit policy: %q", policy)
 	}

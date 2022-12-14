@@ -378,10 +378,15 @@ func (ic *ContainerEngine) playKubePod(ctx context.Context, podName string, podY
 		return nil, nil, fmt.Errorf("pod does not have a name")
 	}
 
+	exitPolicy, err := getPodExitPolicy(annotations)
+	if err != nil {
+		return nil, nil, err
+	}
+
 	podOpt := entities.PodCreateOptions{
 		Infra:      true,
 		Net:        &entities.NetOptions{NoHosts: options.NoHosts},
-		ExitPolicy: string(config.PodExitPolicyStop),
+		ExitPolicy: exitPolicy,
 	}
 	podOpt, err = kube.ToPodOpt(ctx, podName, podOpt, podYAML)
 	if err != nil {

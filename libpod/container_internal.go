@@ -1976,6 +1976,15 @@ func (c *Container) stopPodIfNeeded(ctx context.Context) error {
 	case config.PodExitPolicyContinue:
 		return nil
 
+	case config.PodExitPolicyImmediate:
+		c.runtime.queueWork(func() {
+			_, err = pod.Stop(ctx, true)
+			if !errors.Is(err, define.ErrNoSuchPod) {
+				logrus.Errorf("Stopping pod due to policy: %v", err)
+			}
+		})
+		return nil
+
 	case config.PodExitPolicyStop:
 		// Use the runtime's work queue to stop the pod. This resolves
 		// a number of scenarios where we'd otherwise run into

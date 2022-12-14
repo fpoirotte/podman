@@ -140,6 +140,9 @@ const (
 	// of the init container.
 	InitContainerType = "io.podman.annotations.init.container.type"
 
+	// PodExitPolicy is used by play kube to select how to handle a container exiting.
+	PodExitPolicy = "io.podman.annotations.pod.exit-policy"
+
 	// MaxKubeAnnotation is the max length of annotations allowed by Kubernetes.
 	MaxKubeAnnotation = 63
 )
