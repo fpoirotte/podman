@@ -20,6 +20,9 @@ const (
 	// by the user. It is identical to Always except with respect to
 	// handling of system restart, which Podman does not yet support.
 	RestartPolicyUnlessStopped = "unless-stopped"
+	// RestartPolicyTerminatePod unconditionally stops the pod when one
+	// of its containers terminates (including on normal completion).
+	RestartPolicyTerminatePod = "terminate-pod"
 )
 
 // RestartPolicyMap maps between restart-policy valid values to restart policy types
@@ -29,12 +32,13 @@ var RestartPolicyMap = map[string]string{
 	RestartPolicyAlways:        RestartPolicyAlways,
 	RestartPolicyOnFailure:     RestartPolicyOnFailure,
 	RestartPolicyUnlessStopped: RestartPolicyUnlessStopped,
+	RestartPolicyTerminatePod:  RestartPolicyTerminatePod,
 }
 
 // Validate that the given string is a valid restart policy.
 func ValidateRestartPolicy(policy string) error {
 	switch policy {
-	case RestartPolicyNone, RestartPolicyNo, RestartPolicyOnFailure, RestartPolicyAlways, RestartPolicyUnlessStopped:
+	case RestartPolicyNone, RestartPolicyNo, RestartPolicyOnFailure, RestartPolicyAlways, RestartPolicyUnlessStopped, RestartPolicyTerminatePod:
 		return nil
 	default:
 		return fmt.Errorf("%q is not a valid restart policy: %w", policy, ErrInvalidArg)
