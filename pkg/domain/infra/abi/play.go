@@ -600,6 +600,8 @@ func (ic *ContainerEngine) playKubePod(ctx context.Context, podName string, podY
 		ctrRestartPolicy = define.RestartPolicyOnFailure
 	case v1.RestartPolicyNever:
 		ctrRestartPolicy = define.RestartPolicyNo
+	case v1.RestartPolicyTerminatePod:
+		ctrRestartPolicy = define.RestartPolicyTerminatePod
 	default: // Default to Always
 		ctrRestartPolicy = define.RestartPolicyAlways
 	}

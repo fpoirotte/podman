@@ -1429,7 +1429,7 @@ func WithRestartPolicy(policy string) CtrCreateOption {
 		}
 
 		switch policy {
-		case define.RestartPolicyNone, define.RestartPolicyNo, define.RestartPolicyOnFailure, define.RestartPolicyAlways, define.RestartPolicyUnlessStopped:
+		case define.RestartPolicyNone, define.RestartPolicyNo, define.RestartPolicyOnFailure, define.RestartPolicyAlways, define.RestartPolicyUnlessStopped, define.RestartPolicyTerminatePod:
 			ctr.config.RestartPolicy = policy
 		default:
 			return fmt.Errorf("%q is not a valid restart policy: %w", policy, define.ErrInvalidArg)

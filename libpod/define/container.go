@@ -16,6 +16,9 @@ const (
 	// by the user. It is identical to Always except with respect to
 	// handling of system restart, which Podman does not yet support.
 	RestartPolicyUnlessStopped = "unless-stopped"
+	// RestartPolicyTerminatePod unconditionally stops the pod when one
+	// of its containers terminates (including on normal completion).
+	RestartPolicyTerminatePod = "terminate-pod"
 )
 
 // RestartPolicyMap maps between restart-policy valid values to restart policy types
@@ -25,6 +28,7 @@ var RestartPolicyMap = map[string]string{
 	RestartPolicyAlways:        RestartPolicyAlways,
 	RestartPolicyOnFailure:     RestartPolicyOnFailure,
 	RestartPolicyUnlessStopped: RestartPolicyUnlessStopped,
+	RestartPolicyTerminatePod:  RestartPolicyTerminatePod,
 }
 
 // InitContainerTypes

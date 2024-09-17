@@ -108,6 +108,8 @@ func (p *Pod) GenerateForKube(ctx context.Context, getService bool) (*v1.Pod, []
 				pod.Spec.RestartPolicy = v1.RestartPolicyOnFailure
 			case define.RestartPolicyNo:
 				pod.Spec.RestartPolicy = v1.RestartPolicyNever
+			case define.RestartPolicyTerminatePod:
+				pod.Spec.RestartPolicy = v1.RestartPolicyTerminatePod
 			default: // some pod create from cmdline, such as "", so set it to "" as k8s automatically defaults to always
 				pod.Spec.RestartPolicy = ""
 			}
