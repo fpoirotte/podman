@@ -2074,7 +2074,7 @@ func WithPodRestartPolicy(policy string) PodCreateOption {
 
 		switch policy {
 		//TODO: v5.0 if no restart policy is set, follow k8s convention and default to Always
-		case define.RestartPolicyNone, define.RestartPolicyNo, define.RestartPolicyOnFailure, define.RestartPolicyAlways, define.RestartPolicyUnlessStopped:
+		case define.RestartPolicyNone, define.RestartPolicyNo, define.RestartPolicyOnFailure, define.RestartPolicyAlways, define.RestartPolicyUnlessStopped, define.RestartPolicyTerminatePod:
 			pod.config.RestartPolicy = policy
 		default:
 			return fmt.Errorf("%q is not a valid restart policy: %w", policy, define.ErrInvalidArg)

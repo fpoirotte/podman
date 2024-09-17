@@ -1513,9 +1513,10 @@ type PodCondition struct {
 type RestartPolicy string
 
 const (
-	RestartPolicyAlways    RestartPolicy = "Always"
-	RestartPolicyOnFailure RestartPolicy = "OnFailure"
-	RestartPolicyNever     RestartPolicy = "Never"
+	RestartPolicyAlways       RestartPolicy = "Always"
+	RestartPolicyOnFailure    RestartPolicy = "OnFailure"
+	RestartPolicyNever        RestartPolicy = "Never"
+	RestartPolicyTerminatePod RestartPolicy = "TerminatePod"
 )
 
 // DNSPolicy defines how a pod's DNS will be configured.

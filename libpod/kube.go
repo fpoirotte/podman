@@ -902,6 +902,8 @@ func getPodRestartPolicy(policy string) v1.RestartPolicy {
 		return v1.RestartPolicyAlways
 	case define.RestartPolicyOnFailure:
 		return v1.RestartPolicyOnFailure
+	case define.RestartPolicyTerminatePod:
+		return v1.RestartPolicyTerminatePod
 	default: // some pod/ctr create from cmdline, such as "" - set it to "" and let k8s handle the defaults
 		return ""
 	}

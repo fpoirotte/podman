@@ -1053,7 +1053,7 @@ func AutocompletePullOption(cmd *cobra.Command, args []string, toComplete string
 // -> "always", "no", "on-failure", "unless-stopped"
 func AutocompleteRestartOption(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 	restartOptions := []string{define.RestartPolicyAlways, define.RestartPolicyNo,
-		define.RestartPolicyOnFailure, define.RestartPolicyUnlessStopped}
+		define.RestartPolicyOnFailure, define.RestartPolicyUnlessStopped, define.RestartPolicyTerminatePod}
 	return restartOptions, cobra.ShellCompDirectiveNoFileComp
 }
 

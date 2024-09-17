@@ -242,6 +242,21 @@ func (c *Container) shouldRestart() bool {
 		return false
 	}
 
+	if c.config.RestartPolicy == define.RestartPolicyTerminatePod {
+		pod, err := c.runtime.state.Pod(c.config.Pod)
+		if err != nil {
+			logrus.Errorf("container %s is in pod %s, but pod cannot be retrieved: %w", c.ID(), c.config.Pod, err)
+		}
+		c.runtime.queueWork(func() {
+			if _, err := pod.StopWithTimeout(context.Background(), true, -1); err != nil {
+				if !errors.Is(err, define.ErrNoSuchPod) {
+					logrus.Errorf("Stopping pod due to restartPolicy: %v", err)
+				}
+			}
+		})
+		return false
+	}
+
 	// If we're RestartPolicyOnFailure, we need to check retries and exit
 	// code.
 	if c.config.RestartPolicy == define.RestartPolicyOnFailure {
